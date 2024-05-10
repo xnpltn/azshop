@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.nav-button {
+    @apply cursor-pointer bg-red-500 rounded-md p-2 hover:bg-red-200;
+}
+
+.quote-form-field{
+    @apply mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md
+}
+
+.quote-form-label{
+    @apply block text-sm font-medium text-gray-700
+}
+

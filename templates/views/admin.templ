@@ -1,0 +1,27 @@
+package views
+
+templ AdminView(title string) {
+	<div>
+		<h1>{ title }</h1>
+
+		<div class="flex items-center justify-center flex-col">
+            <h2>Add Product</h2>
+			<form action="add_product.php" hx-post="/admin/product" hx-target="#target" hx-encoding="multipart/form-data">
+				<label for="name" class="quote-form-label">Name:</label>
+				<br/>
+				<input type="text" class="quote-form-field" id="name" name="name"/>
+				<br/>
+				<label for="price" class="quote-form-label">Price:</label>
+				<br/>
+				<input type="text" class="quote-form-field" id="price" name="price"/>
+				<br/>
+				<label for="image" class="quote-form-label">Image:</label>
+				<br/>
+				<input type="file" class="quote-form-field" id="image" name="image"/>
+				<br/>
+				<input type="submit" class="quote-form-field" value="Submit"/>
+			</form>
+		</div>
+		<div id="target"></div>
+	</div>
+}
