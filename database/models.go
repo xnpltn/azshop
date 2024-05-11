@@ -11,10 +11,21 @@ import (
 )
 
 type Product struct {
+	ID          uuid.UUID
+	Name        string
+	Price       string
+	ImageUrl    string
+	CreatedAt   sql.NullTime
+	UpdatedAt   sql.NullTime
+	Description string
+}
+
+type User struct {
 	ID        uuid.UUID
 	Name      string
-	Price     string
-	ImageUrl  string
+	Email     string
+	Password  string
+	Verified  bool
 	CreatedAt sql.NullTime
 	UpdatedAt sql.NullTime
 }

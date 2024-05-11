@@ -11,15 +11,18 @@ templ Layout(path string, logedIn bool) {
 			<title>Document</title>
 			<link rel="stylesheet" href="/static/css/styles.css"/>
 			<script src="/static/js/htmx.min.js" crossorigin="anonymous"></script>
+			<script src="/static/js/alpine.min.js" defer crossorigin="anonymous"></script>
 		</head>
-		<body class="px-10 md:px-20 lg:px-32">
+		<body class="">
 			@components.Header()
 			<main
 				id="view"
 				hx-swap="innerHTML"
 				hx-get={ path }
 				hx-trigger="load"
+				class="px-32"
 			></main>
+			@components.Footer()
 		</body>
 	</html>
 }

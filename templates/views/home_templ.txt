@@ -1,0 +1,10 @@
+<div class=\"products flex flex-col py-5 gap-2\"><h1 class=\"text-gray-700 text-2xl font-bold \">Products</h1><div class=\"grid grid-cols-4 gap-4 mt-5\">
+<div><div class=\"max-w-xs bg-white shadow-md rounded-lg overflow-hidden\"><img hx-get=\"
+\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"w-full h-48 object-cover object-center\" src=\"
+\" alt=\"
+\" width=\"200\"><div class=\"grid grid-cols-2\"><div class=\"p-4\"><h2 class=\"text-gray-800 font-semibold text-lg\">
+</h2><p class=\"text-gray-700 mt-2\"><h3>$
+</h3></p></div><div class=\"flex items-center\"><span class=\"bg-red-500 p-2 rounded hover:bg-red-300 hover:cursor-pointer\">Add</span></div></div></div></div>
+</div></div>
+<div class=\"flex items-center justify-center h-[600px]\"><h1 class=\"text-gray-700 font-bold text-5xl text-green-600\">
+</h1></div>

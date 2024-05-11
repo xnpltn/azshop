@@ -1,0 +1,12 @@
+package components
+
+import "time"
+import "fmt"
+
+templ Footer() {
+	<footer class="px-32 mt-40">
+        <div>
+            CopyRight {fmt.Sprintf("%d", time.Now().Year())}
+        </div>
+    </footer>
+}

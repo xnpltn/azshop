@@ -14,24 +14,30 @@ import (
 const createProduct = `-- name: CreateProduct :exec
 
 
-INSERT INTO product (name, price, image_url)
-VALUES ($1, $2, $3)
+INSERT INTO product (name, price, image_url, description)
+VALUES ($1, $2, $3, $4)
 `
 
 type CreateProductParams struct {
-	Name     string
-	Price    string
-	ImageUrl string
+	Name        string
+	Price       string
+	ImageUrl    string
+	Description string
 }
 
 func (q *Queries) CreateProduct(ctx context.Context, arg CreateProductParams) error {
-	_, err := q.db.ExecContext(ctx, createProduct, arg.Name, arg.Price, arg.ImageUrl)
+	_, err := q.db.ExecContext(ctx, createProduct,
+		arg.Name,
+		arg.Price,
+		arg.ImageUrl,
+		arg.Description,
+	)
 	return err
 }
 
 const getAllProducts = `-- name: GetAllProducts :many
 
-SELECT id, name, price, image_url, created_at, updated_at FROM product
+SELECT id, name, price, image_url, created_at, updated_at, description FROM product
 `
 
 func (q *Queries) GetAllProducts(ctx context.Context) ([]Product, error) {
@@ -50,6 +56,7 @@ func (q *Queries) GetAllProducts(ctx context.Context) ([]Product, error) {
 			&i.ImageUrl,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.Description,
 		); err != nil {
 			return nil, err
 		}
@@ -66,7 +73,7 @@ func (q *Queries) GetAllProducts(ctx context.Context) ([]Product, error) {
 
 const getProductByID = `-- name: GetProductByID :one
 
-SELECT id, name, price, image_url, created_at, updated_at FROM product WHERE id = $1
+SELECT id, name, price, image_url, created_at, updated_at, description FROM product WHERE id = $1
 `
 
 func (q *Queries) GetProductByID(ctx context.Context, id uuid.UUID) (Product, error) {
@@ -79,6 +86,7 @@ func (q *Queries) GetProductByID(ctx context.Context, id uuid.UUID) (Product, er
 		&i.ImageUrl,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Description,
 	)
 	return i, err
 }

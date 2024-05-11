@@ -23,7 +23,7 @@ func AdminView(title string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><h1>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -36,7 +36,7 @@ func AdminView(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><div class=\"flex items-center justify-center flex-col\"><h2>Add Product</h2><form action=\"add_product.php\" hx-post=\"/admin/product\" hx-target=\"#target\" hx-encoding=\"multipart/form-data\"><label for=\"name\" class=\"quote-form-label\">Name:</label><br><input type=\"text\" class=\"quote-form-field\" id=\"name\" name=\"name\"><br><label for=\"price\" class=\"quote-form-label\">Price:</label><br><input type=\"text\" class=\"quote-form-field\" id=\"price\" name=\"price\"><br><label for=\"image\" class=\"quote-form-label\">Image:</label><br><input type=\"file\" class=\"quote-form-field\" id=\"image\" name=\"image\"><br><input type=\"submit\" class=\"quote-form-field\" value=\"Submit\"></form></div><div id=\"target\"></div></div>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -1,0 +1,2 @@
+<footer class=\"px-32 mt-40\"><div>CopyRight 
+</div></footer>

@@ -1,5 +1,5 @@
 run: 
-	go build -o bin/app cmd/main.go && ./bin/app
+	go build -o bin/app main.go && ./bin/app
 
 ts:
 	tailwindcss --config configs/tailwind.config.js \

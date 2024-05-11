@@ -25,9 +25,8 @@ func(a *Application) CreateProduct(c echo.Context) error{
 			fmt.Println(err)
 		}
 	}
-	name := c.FormValue("name")
 	price := c.FormValue("price")
-	tempfile, err := os.CreateTemp("assets/products/", "image-"+name+"-*.jpg")
+	tempfile, err := os.CreateTemp("assets/products/", "image-"+c.FormValue("name")+"-*.jpg")
 	if err != nil{
 		fmt.Println("error occured", err)
 	}
@@ -36,8 +35,6 @@ func(a *Application) CreateProduct(c echo.Context) error{
 	if err!= nil{
 		fmt.Println(err)
 	}
-
-	fmt.Println("Parsed Float: ", pp)
 
 	file, err := f.Open()
 	if err!= nil{
@@ -53,14 +50,13 @@ func(a *Application) CreateProduct(c echo.Context) error{
 		fmt.Println(err)
 	}
 	product := database.CreateProductParams{
-		Name: name,
-		Price: price,
+		Name: c.FormValue("name"),
+		Price: fmt.Sprintf("%f", pp),
 		ImageUrl: fmt.Sprintf("/static%s", tempfile.Name()[6:]),
+		Description: c.FormValue("description"),
 	}
-	fmt.Println(product.ImageUrl)
 
-	err = a.db.CreateProduct(c.Request().Context(), product)
-	if err!= nil{
+	if 	err := a.db.CreateProduct(c.Request().Context(), product) ;err!= nil{
 		fmt.Println(err)
 
 		return c.HTML(200, "<p>Something went wrong</p>")

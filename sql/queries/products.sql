@@ -1,8 +1,8 @@
 -- name: CreateProduct :exec
 
 
-INSERT INTO product (name, price, image_url)
-VALUES ($1, $2, $3);
+INSERT INTO product (name, price, image_url, description)
+VALUES ($1, $2, $3, $4);
 
 -- name: GetProductByID :one
 

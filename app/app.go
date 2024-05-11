@@ -4,18 +4,19 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/xnpltn/azshop/database"
 )
 
-
-type Application struct{
-	db *database.Queries
+type Application struct {
+	db     *database.Queries
 	Router *echo.Echo
 }
 
-func NewApp() *Application{
+func NewApp() *Application {
 	r := echo.New()
 
 	return &Application{
@@ -23,36 +24,41 @@ func NewApp() *Application{
 	}
 }
 
+func (a *Application) Start(port uint32) error {
+	godotenv.Load()
 
-func(a *Application) Start(port uint32) error{
-	conn, err := sql.Open("postgres", "postgresql://postgres:postgres@localhost:5433/azshop?sslmode=disable")
-	if err != nil{
+	conn, err := sql.Open("postgres", os.Getenv("DB_URL"))
+	if err != nil {
 		log.Fatal("Can't connect to databse: ", err)
 	}
-	a.db  = database.New(conn)
+	a.db = database.New(conn)
 	a.Load()
 	err = a.Router.Start(fmt.Sprintf(":%d", port))
 	return err
 }
-func(a *Application)Stop()error{
+func (a *Application) Stop() error {
 	return nil
 }
 
+func (a *Application) Load() {
 
-func(a *Application) Load(){
-	
-	
 	// views
 	a.Router.Static("/static", "assets")
 	a.Router.GET("/", a.HomeGetHandler())
 	a.Router.GET("/about", a.AboutGetHandler())
+	a.Router.GET("/login", a.LoginGetHandler())
 	a.Router.GET("/admin", a.Admin())
 
-	
+	// auth
+	auth := a.Router.Group("/auth")
+	auth.POST("/login", a.Login())
+	auth.POST("/signup", a.Signup())
 
 	// api
 	admin := a.Router.Group("/admin")
 	admin.POST("/product", a.CreateProduct)
+
+	// product
+	product := a.Router.Group("/product")
+	product.GET("/:id", a.Product())
 }
-
-
