@@ -2,3 +2,4 @@ bin/
 .env
 .vscode/
 assets/products/
+templates/*templ.txt
