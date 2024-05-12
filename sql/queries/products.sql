@@ -12,3 +12,7 @@ SELECT * FROM product WHERE id = $1;
 -- name: GetAllProducts :many
 
 SELECT * FROM product;
+
+-- name: DeleteProductByID :exec
+
+DELETE FROM product WHERE id=$1;

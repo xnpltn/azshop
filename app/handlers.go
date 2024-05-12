@@ -9,25 +9,28 @@ import (
 	"github.com/xnpltn/azshop/database"
 	"github.com/xnpltn/azshop/templates"
 	"github.com/xnpltn/azshop/templates/views"
+	"github.com/xnpltn/azshop/utls"
 )
 
 func(a *Application) RenderView(c echo.Context, view templ.Component, layoutPath string) error {
 	if c.Request().Header.Get("Hx-Request") == "true" {
 		return view.Render(c.Request().Context(), c.Response().Writer)
 	}
-	 return templates.Layout(layoutPath, false).Render(c.Request().Context(), c.Response().Writer)
+	_, logedIn := utls.CheckCredentials(c, a.db)
+	return templates.Layout(layoutPath, logedIn).Render(c.Request().Context(), c.Response().Writer)
 }
 
 func(a *Application) HomeGetHandler() echo.HandlerFunc {
 	
 	return func(c echo.Context) error {
+		_, logedIn := utls.CheckCredentials(c, a.db)
 		products, err := a.db.GetAllProducts(c.Request().Context())
 		if err!= nil{
 			fmt.Println(err)
-			return a.RenderView(c, views.HomeView("Home", []database.Product{}), "/")
+			return a.RenderView(c, views.HomeView("Home", []database.Product{}, logedIn), "/")
 		}
 
-		return a.RenderView(c, views.HomeView("Hello", products), "/")
+		return a.RenderView(c, views.HomeView("Hello", products, logedIn), "/")
 	}
 
 }
@@ -49,7 +52,11 @@ func(a *Application) LoginGetHandler() echo.HandlerFunc {
 
 func(a *Application) Admin()echo.HandlerFunc{
 	return func(c echo.Context) error {
-		return a.RenderView(c, views.AdminView("Admin"), "/admin")
+		products, err := a.db.GetAllProducts(c.Request().Context())
+		if err!= nil{
+			return a.RenderView(c, views.AdminView("Admin", []database.Product{}), "/admin")
+		}
+		return a.RenderView(c, views.AdminView("Admin", products), "/admin")
 	}
 }
 
@@ -66,5 +73,24 @@ func(a *Application) Product()echo.HandlerFunc{
 			return a.RenderView(c, views.Product(database.Product{}), "/product/1")
 		}
 		return a.RenderView(c, views.Product(product), fmt.Sprintf("/product/%s", id_.String()))
+	}
+}
+
+func (a *Application)Cart()echo.HandlerFunc{
+	return func(c echo.Context) error {
+		user, _ := utls.CheckCredentials(c, a.db)
+		cart , err := a.db.GetUserCart(c.Request().Context(), user.ID)
+		if err != nil{
+			fmt.Println(err)
+			return a.RenderView(c, views.Cart([]database.GetUserCartRow{}), "/cart")
+		}
+		return a.RenderView(c, views.Cart(cart), "/cart")
+	}
+}
+
+
+func (a *Application) Profile() echo.HandlerFunc{
+	return func(c echo.Context) error {
+		return a.RenderView(c, views.ProfileView("Profile"), "/profile")
 	}
 }

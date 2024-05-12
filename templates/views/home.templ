@@ -3,7 +3,7 @@ package views
 import "github.com/xnpltn/azshop/database"
 import "fmt"
 
-templ HomeView(title string, products []database.Product) {
+templ HomeView(title string, products []database.Product, logedIn bool) {
 	if len(products) != 0 {
 		<div class="products flex flex-col py-5 gap-2">
 			<h1 class="text-gray-700 text-2xl font-bold ">Products</h1>
@@ -22,13 +22,15 @@ templ HomeView(title string, products []database.Product) {
 								width="200"
 							/>
 							<div class="grid grid-cols-2">
-								<div class="p-4">
+								<div class="p-2">
 									<h2 class="text-gray-800 font-semibold text-lg">{ product.Name }</h2>
 									<p class="text-gray-700 mt-2"><h3>${ product.Price }</h3></p>
 								</div>
-								<div class="flex items-center">
-									<span class="bg-red-500 p-2 rounded hover:bg-red-300 hover:cursor-pointer">Add</span>
-								</div>
+								if logedIn {
+									<div class="flex items-center">
+										<span class="bg-red-500 p-2 rounded hover:bg-red-300 hover:cursor-pointer" hx-post="/product/cart" hx-trigger="click" hx-vals={ fmt.Sprintf(`"product_id":"%s"`, product.ID) }>Add</span>
+									</div>
+								}
 							</div>
 						</div>
 					</div>

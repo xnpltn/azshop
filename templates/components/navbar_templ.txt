@@ -1,1 +1,5 @@
-<header class=\"bg-blue-700 px-32 \"><nav class=\" py-5 px-5 flex items-center justify-between\"><h1 class=\"text-white text-2xl font-bold\">Az</h1><div class=\"flex gap-5\"><a hx-get=\"/\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button bg-blue-200\">Home</a> <a hx-get=\"/login\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button\">Login</a> <a hx-get=\"/about\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button\">About</a></div></nav></header>
+<header class=\"bg-blue-700 px-32 \"><nav class=\" py-5 px-5 flex items-center justify-between\"><h1 class=\"text-white text-2xl font-bold\">Az</h1><div class=\"flex gap-5\"><a hx-get=\"/\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button bg-blue-200\">Home</a> 
+<a hx-get=\"/login\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button\">Login</a> 
+<a hx-get=\"/cart\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button\">Cart</a> 
+<a hx-get=\"/profile\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button\">Profile</a> 
+<a hx-get=\"/about\" hx-target=\"#view\" hx-trigger=\"click\" hx-push-url=\"true\" class=\"nav-button\">About</a></div></nav></header>

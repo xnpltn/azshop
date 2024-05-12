@@ -1,6 +1,6 @@
 package components
 
-templ Header() {
+templ Header(logedIn bool) {
 	<header class="bg-blue-700 px-32 ">
 		<nav class=" py-5 px-5 flex items-center justify-between">
 			<h1 class="text-white text-2xl font-bold">Az</h1>
@@ -12,13 +12,33 @@ templ Header() {
 					hx-push-url="true"
 					class="nav-button bg-blue-200"
 				>Home</a>
-				<a
-					hx-get="/login"
-					hx-target="#view"
-					hx-trigger="click"
-					hx-push-url="true"
-					class="nav-button"
-				>Login</a>
+				if !logedIn {
+					<a
+						hx-get="/login"
+						hx-target="#view"
+						hx-trigger="click"
+						hx-push-url="true"
+						class="nav-button"
+					>Login</a>
+				}
+				if logedIn {
+					<a
+						hx-get="/cart"
+						hx-target="#view"
+						hx-trigger="click"
+						hx-push-url="true"
+						class="nav-button"
+					>Cart</a>
+				}
+				if logedIn {
+					<a
+						hx-get="/profile"
+						hx-target="#view"
+						hx-trigger="click"
+						hx-push-url="true"
+						class="nav-button"
+					>Profile</a>
+				}
 				<a
 					hx-get="/about"
 					hx-target="#view"

@@ -1,0 +1,22 @@
+package forms
+
+templ AdminAddProduct() {
+	<div class="flex items-center justify-center flex-col">
+		<h2>Add Product</h2>
+		<form  hx-post="/admin/product" hx-target="#target" hx-encoding="multipart/form-data">
+			<label for="name" class="quote-form-label">Name:</label>
+			<input type="text" class="appearance-none border border-red-600 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name"/>
+			<br/>
+			<label for="price" class="quote-form-label">Price:</label>
+			<input type="number" class="appearance-none border border-red-600 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price"/>
+			<br/>
+			<label for="image" class="quote-form-label">Image:</label>
+			<input type="file" class="appearance-none border border-red-600 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" name="image"/>
+			<br/>
+			<label for="description" class="quote-form-label">Description:</label>
+			<textarea name="description" id="description" class="appearance-none border border-red-600 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+			<input type="submit" class="quote-form-field" value="Submit"/>
+		</form>
+	</div>
+	<div id="target"></div>
+}

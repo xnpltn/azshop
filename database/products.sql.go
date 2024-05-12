@@ -35,6 +35,16 @@ func (q *Queries) CreateProduct(ctx context.Context, arg CreateProductParams) er
 	return err
 }
 
+const deleteProductByID = `-- name: DeleteProductByID :exec
+
+DELETE FROM product WHERE id=$1
+`
+
+func (q *Queries) DeleteProductByID(ctx context.Context, id uuid.UUID) error {
+	_, err := q.db.ExecContext(ctx, deleteProductByID, id)
+	return err
+}
+
 const getAllProducts = `-- name: GetAllProducts :many
 
 SELECT id, name, price, image_url, created_at, updated_at, description FROM product

@@ -29,3 +29,12 @@ type User struct {
 	CreatedAt sql.NullTime
 	UpdatedAt sql.NullTime
 }
+
+type UserCart struct {
+	ID        uuid.UUID
+	UserID    uuid.UUID
+	ProductID uuid.UUID
+	Quantity  int32
+	CreatedAt sql.NullTime
+	UpdatedAt sql.NullTime
+}

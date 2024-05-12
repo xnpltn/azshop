@@ -48,17 +48,23 @@ func (a *Application) Load() {
 	a.Router.GET("/about", a.AboutGetHandler())
 	a.Router.GET("/login", a.LoginGetHandler())
 	a.Router.GET("/admin", a.Admin())
+	a.Router.GET("/cart", a.Cart())
+	a.Router.GET("/profile", a.Profile())
 
 	// auth
 	auth := a.Router.Group("/auth")
 	auth.POST("/login", a.Login())
 	auth.POST("/signup", a.Signup())
+	auth.POST("/logout", a.Logout())
 
 	// api
 	admin := a.Router.Group("/admin")
 	admin.POST("/product", a.CreateProduct)
+	admin.POST("/product/delete", a.DeleteProduct)
+
 
 	// product
 	product := a.Router.Group("/product")
 	product.GET("/:id", a.Product())
+	product.POST("/cart", a.AddToCarT())
 }
