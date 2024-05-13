@@ -14,21 +14,22 @@ var ErrDuplicate = errors.New(`pq: duplicate key value violates unique constrain
 
 func (a *Application) Login() echo.HandlerFunc {
 	return func(c echo.Context) error {
-
 		email := c.FormValue("email")
 		password := c.FormValue("password")
-		db_user, err := a.db.GetUserByEmail(c.Request().Context(), email)
+		user, err := a.db.GetUserByEmail(c.Request().Context(), email)
 		if err != nil {
-			fmt.Println(err)
-			return c.HTML(200, "Error")
+			return c.HTML(http.StatusOK, "Error")
 		}
-		
-		if !utls.CheckPasswordHash(password, db_user.Password) {
-			return c.HTML(200, "Invalid Credentials")
+		token, err := utls.NewToken(user)
+		if err != nil {
+			return c.HTML(http.StatusOK, "something went wrong")
+		}
+		if !utls.CheckPasswordHash(password, user.Password) {
+			return c.HTML(http.StatusOK, "Invalid Credentials")
 		}
 		c.SetCookie(&http.Cookie{
 			Name:     "auth_token",
-			Value:    email,
+			Value:    token,
 			Secure:   true,
 			SameSite: http.SameSiteStrictMode,
 			HttpOnly: true,
@@ -37,7 +38,7 @@ func (a *Application) Login() echo.HandlerFunc {
 		})
 
 		return c.HTML(
-			200,
+			http.StatusOK,
 			`
 			<span class="text-center text-blue-700">
 				SUCCESS | click <a href="/" class="underline text-red-500">here</a> to get home,
@@ -49,7 +50,8 @@ func (a *Application) Login() echo.HandlerFunc {
 
 func (a *Application) Signup() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		if c.FormValue("password") != c.FormValue("password1") {
+		fmt.Println(c.FormParams())
+		if c.FormValue("password-s") != c.FormValue("password-s-1") {
 			return c.HTML(200, `
 			<span class="text-center text-blue-700">
 				Passwordss Should be equal,
@@ -57,7 +59,7 @@ func (a *Application) Signup() echo.HandlerFunc {
 			`)
 		}
 
-		pass, err := utls.HashPassword(c.FormValue("password"))
+		pass, err := utls.HashPassword(c.FormValue("password-s"))
 		if err != nil {
 			return c.HTML(200, `
 				<span class="text-center text-blue-700">
@@ -66,8 +68,8 @@ func (a *Application) Signup() echo.HandlerFunc {
 		}
 
 		err = a.db.CreateUser(c.Request().Context(), database.CreateUserParams{
-			Name:     c.FormValue("name"),
-			Email:    c.FormValue("email"),
+			Name:     c.FormValue("name-s"),
+			Email:    c.FormValue("email-s"),
 			Password: pass,
 		})
 
@@ -95,6 +97,7 @@ func (a *Application) Signup() echo.HandlerFunc {
 
 func (a *Application) Logout() echo.HandlerFunc {
 	return func(c echo.Context) error {
+		c.Response().Header().Set("HX-Redirect", "/")
 		c.SetCookie(&http.Cookie{
 			Name:     "auth_token",
 			Value:    "",
@@ -104,6 +107,6 @@ func (a *Application) Logout() echo.HandlerFunc {
 			MaxAge:   3600,
 			Path:     "/",
 		})
-		return c.HTML(200, "Log Out")
+		return c.HTML(http.StatusOK, "Log Out")
 	}
 }

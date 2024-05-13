@@ -1,12 +1,22 @@
 package views
 
-templ ProfileView(title string) {
+import "github.com/xnpltn/azshop/database"
+
+templ ProfileView(title string, user database.GetUserByIDRow) {
 	<div class="flex items-center justify-center h-[600px] flex-col gap-5">
 		<h1 class="text-gray-700 font-bold text-5xl text-red-600">
 			{ title }
 		</h1>
-        <div class="bg-red-500 p-3 rounded cursor-pointer" hx-post="/auth/logout">
-            <span class="text-white text-2xl">Logout</span>
-        </div>
+		<div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-xs">
+			<div class="px-6 py-4 flex flex-col items-center justify-center">
+				<div class="font-bold text-xl mb-2">{ user.Name }</div>
+				<p class="text-gray-700 text-base">
+					{ user.Email }
+				</p>
+			</div>
+		</div>
+		<div class="bg-red-500 p-3 rounded cursor-pointer" hx-post="/auth/logout" hx-trigger="click" hx-confirm="Are you Sure you want log out">
+			<span class="text-white text-2xl">Logout</span>
+		</div>
 	</div>
 }

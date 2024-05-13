@@ -1,4 +1,4 @@
 <!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title><link rel=\"stylesheet\" href=\"/static/css/styles.css\"><script src=\"/static/js/htmx.min.js\" crossorigin=\"anonymous\"></script><script src=\"/static/js/alpine.min.js\" defer crossorigin=\"anonymous\"></script></head><body class=\"\">
 <main id=\"view\" hx-swap=\"innerHTML\" hx-get=\"
 \" hx-trigger=\"load\" class=\"px-32\"></main>
-</body></html>kjl;lkjlkj;lkj
+</body></html>

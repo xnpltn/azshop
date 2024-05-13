@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/xnpltn/azshop/database"
 )
@@ -25,7 +24,6 @@ func NewApp() *Application {
 }
 
 func (a *Application) Start(port uint32) error {
-	godotenv.Load()
 
 	conn, err := sql.Open("postgres", os.Getenv("DB_URL"))
 	if err != nil {
