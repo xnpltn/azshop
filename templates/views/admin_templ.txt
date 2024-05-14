@@ -1,6 +1,7 @@
 <section><div class=\"py-2\"><div class=\"flex items-center justify-center flex-col gap-5\"><h1 class=\"text-gray-700 font-bold text-5xl text-red-600\">
 </h1></div></div><div>
 </div><div><div><h2 class=\"text-gray-700 font-bold text-3xl text-red-600\">All products</h2></div>
+<div><h2 class=\"text-gray-700 font-bold text-3xl text-red-600\">No Products</h2></div>
 <div class=\"flex gap-5 flex-col pt-5\">
 <div class=\"flex gap-10\" id=\"
 \"><div class=\"flex gap-2 px-5 flex-col\"><h3 class=\"text-2xl font-bold\">

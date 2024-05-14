@@ -104,3 +104,22 @@ func (a *Application) DeleteProduct(c echo.Context) error{
 	return c.HTML(202, "deleted")
 }
 
+
+func(a *Application)RemoveFromCart(c echo.Context) error{
+	// type Data struct{
+	// 	ID string `json:"product_id" form:"product_id" params:"id"`
+	// }
+	// data := new(Data)
+	// c.Bind(data)
+	id, err:= uuid.Parse(c.Param("id"))
+	if err!= nil{
+		fmt.Println(err)
+		return c.HTML(200, "something went wrong")
+	}
+	err = a.db.DeleteFromCartByID(c.Request().Context(), id)
+	if err!= nil{
+		return c.HTML(200, "somthing went wrong")
+	}
+	return c.HTML(200, "deleted")
+}
+

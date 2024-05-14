@@ -1,6 +1,7 @@
 package views
 
 import "github.com/xnpltn/azshop/database"
+import "fmt"
 
 var sum int32
 
@@ -21,7 +22,7 @@ templ Cart(cart []database.GetUserCartRow) {
 			</div>
 		} else {
 			for _, product := range cart {
-				<div class="py-5 shadow-lg">
+				<div class="py-5 shadow-lg flex items-center justify-between px-5" id={ fmt.Sprintf("delete-%v", product.ProductID) }>
 					<div class="max-w-[500px] rounded overflow-hidden  flex flex-col md:flex-row md:gap-5">
 						<div class="md:w-1/2 pl-5">
 							<img class="w-full" src={ product.ProductImage } alt={ product.ProductName }/>
@@ -35,6 +36,9 @@ templ Cart(cart []database.GetUserCartRow) {
 							</div>
 							<p class="text-gray-700 text-base">{ product.ProductDescription }</p>
 						</div>
+					</div>
+					<div class="flex flex-col">
+						<button type="button" class="text-white bg-red-500 rounded px-2" hx-post={ fmt.Sprintf("/product/cart/delete/%v", product.ProductID) } hx-confirm="Do you want to remove to cart?" hx-trigger="click" hx-target={ fmt.Sprintf("#delete-%v", product.ProductID) } hx-vals={ fmt.Sprintf(`"product_id":"%s"`, product.ProductID) }>delete</button>
 					</div>
 				</div>
 			}

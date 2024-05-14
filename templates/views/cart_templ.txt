@@ -1,9 +1,13 @@
 <section class=\"py-5\"><div><div class=\"flex items-center justify-center flex-col gap-5\"><h1 class=\"text-gray-700 font-bold text-5xl text-red-600\">Cart</h1></div></div>
 <div class=\"flex items-center justify-center h-[600px] flex-col gap-5\"><h1 class=\"text-gray-700 font-bold text-5xl text-red-600\">Cart Is empty</h1></div>
-<div class=\"py-5 shadow-lg\"><div class=\"max-w-[500px] rounded overflow-hidden  flex flex-col md:flex-row md:gap-5\"><div class=\"md:w-1/2 pl-5\"><img class=\"w-full\" src=\"
+<div class=\"py-5 shadow-lg flex items-center justify-between px-5\" id=\"
+\"><div class=\"max-w-[500px] rounded overflow-hidden  flex flex-col md:flex-row md:gap-5\"><div class=\"md:w-1/2 pl-5\"><img class=\"w-full\" src=\"
 \" alt=\"
 \"></div><div class=\"md:w-1/2 \"><div class=\"px-6 py-4\"><div class=\"font-bold text-xl mb-2\">
 </div><p class=\"text-gray-700 text-base\">
 </p></div><p class=\"text-gray-700 text-base\">
-</p></div></div></div>
+</p></div></div><div class=\"flex flex-col\"><button type=\"button\" class=\"text-white bg-red-500 rounded px-2\" hx-post=\"
+\" hx-confirm=\"Do you want to remove to cart?\" hx-trigger=\"click\" hx-target=\"
+\" hx-vals=\"
+\">delete</button></div></div>
 </section>

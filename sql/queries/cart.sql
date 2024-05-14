@@ -19,3 +19,6 @@ JOIN
 WHERE
     uc.user_id = $1;
 
+-- name: DeleteFromCartByID :exec
+
+DELETE FROM user_cart WHERE product_id=$1;

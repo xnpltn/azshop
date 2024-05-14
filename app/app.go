@@ -65,4 +65,5 @@ func (a *Application) Load() {
 	product := a.Router.Group("/product")
 	product.GET("/:id", a.Product())
 	product.POST("/cart", a.AddToCarT())
+	product.POST("/cart/delete/:id", a.RemoveFromCart)
 }
