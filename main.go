@@ -16,5 +16,14 @@ func init() {
 
 func main() {
 	app := app.NewApp()
-	log.Fatal(app.Start(PORT))
+  errChan := make(chan error)
+	go func (){
+    err := app.Start(PORT)
+    if err!= nil{
+      errChan <- err
+    }
+  }()
+
+  log.Fatal(<-errChan)
+
 }
