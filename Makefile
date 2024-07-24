@@ -12,7 +12,7 @@ templ:
 	templ generate -watch -proxy=http://localhost:6969
 
 goose-up:
-	cd sql/schema; goose postgres postgresql://postgres:postgres@localhost:5433/azshop up
+	cd sql/schema; goose postgres postgresql://postgres:postgres@localhost:5432/postgres up
 
 
 goose-down:

@@ -3,26 +3,23 @@ package templates
 import "github.com/xnpltn/azshop/templates/components"
 
 templ Layout(path string, logedIn bool) {
-	<!DOCTYPE html>
-	<html lang="en">
-		<head>
-			<meta charset="UTF-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<title>Document</title>
-			<link rel="stylesheet" href="/static/css/styles.css"/>
-			<script src="/static/js/htmx.min.js" crossorigin="anonymous"></script>
-			<script src="/static/js/alpine.min.js" defer crossorigin="anonymous"></script>
-		</head>
-		<body class="">
-			@components.Header(logedIn)
-			<main
-				id="view"
-				hx-swap="innerHTML"
-				hx-get={ path }
-				hx-trigger="load"
-				class="px-32"
-			></main>
-			@components.Footer()
-		</body>
-	</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  <script src="/static/js/htmx.min.js" crossorigin="anonymous"></script>
+  <script src="/static/js/alpine.min.js" defer crossorigin="anonymous"></script>
+</head>
+
+<body class="">
+  @components.Header(logedIn)
+  <main id="view" hx-swap="innerHTML" hx-get={ path } hx-trigger="load" class="px-32"></main>
+  @components.Footer()
+</body>
+
+</html>
 }
