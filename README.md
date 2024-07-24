@@ -16,7 +16,7 @@ using Postgres as database.
 
 
 ```bash
-// run air in your terminal for development.
+# run air in your terminal for development.
 air
 ```
 
